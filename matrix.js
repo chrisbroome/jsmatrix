@@ -1,10 +1,20 @@
-// @description: 
+// @description: creates a matrix from the given 2 dimensional array
 function Matrix( els ) {
   var a = els.slice(),
       size = {
         rows: a.length,
         cols: a[0].length
       };
+
+  this.els = a;
+  this.size = size;
+  this.row = row;
+  this.col = col;
+  this.at = at;
+  this.rows = rows;
+  this.cols = cols;
+  this.add = add;
+  this.multiply = multiply;
 
   // @description: gets a column vector at the specified row
   function row( i ) {
@@ -60,16 +70,6 @@ function Matrix( els ) {
       return m;
     }
   }
-
-  this.els = a;
-  this.size = size;
-  this.row = row;
-  this.col = col;
-  this.at = at;
-  this.rows = rows;
-  this.cols = cols;
-  this.add = add;
-  this.multiply = multiply;
 
   function iterate( cb ) {
     return a.map( function( row, r_index ) {
