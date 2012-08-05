@@ -43,3 +43,18 @@ console.log('y: ', y.els);
 
 var r = x.multiply(y);
 console.log('r = xy: ', r.els);
+
+var z = a.concat(g);
+console.log('z = a concat g: ', z.els );
+
+function identities( n ) {
+  var r = [], i;
+  for( i = 0; i < n; i++ ) {
+    r.push(Matrix.identity(i));
+  }
+  return r;
+}
+
+identities(10).map(function(v) {
+  console.log(v.els);
+});

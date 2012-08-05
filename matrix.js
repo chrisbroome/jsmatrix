@@ -1,10 +1,9 @@
 // @description: creates a matrix from the given 2 dimensional array
 function Matrix( els ) {
-  var a = els.slice(),
-      size = {
-        rows: a.length,
-        cols: a[0].length
-      };
+
+  var defaults = init(els);
+  var a = defaults.a;
+      size = defaults.size;
 
   this.els = a;
   this.size = size;
@@ -15,6 +14,24 @@ function Matrix( els ) {
   this.cols = cols;
   this.add = add;
   this.multiply = multiply;
+  this.concat = concat;
+
+  // @description: initializes default values from the given object
+  function init( e ) {
+    var defs = {
+      a: [],
+      size: {
+        rows: 0,
+        cols: 0
+      }
+    };
+    if( typeof e === 'object' && e.constructor === Array ) {
+      defs.a = e.slice();
+      defs.rows = defs.a.length;
+      defs.cols = defs.a[0].length;
+    };
+    return defs;
+  }
 
   // @description: gets a column vector at the specified row
   function row( i ) {
@@ -122,6 +139,30 @@ function Matrix( els ) {
       return va;
     } );
   }
+
+  function concat( m ) {
+    if( size.rows != m.size.rows )
+      throw new Error('Matrices have different number of rows');
+    var x = rows().map( function( row_r, r ) {
+      return row_r.concat( m.row(r) );
+    } ).slice();
+    return new Matrix( x );
+  }
+}
+
+Matrix.zero = new Matrix();
+
+Matrix.identity = function( n ) {
+  if( n < 1 ) return Matrix.zero;
+  var m = [], nrow, r, c;
+  for( r = 0; r < n; r++ ) {
+    nrow = [];
+    for( c = 0; c < n; c++ ) {
+      nrow.push( r === c ? 1 : 0 );
+    }
+    m.push( nrow );
+  }
+  return new Matrix( m );
 }
 
 module.exports = Matrix;
