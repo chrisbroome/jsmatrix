@@ -1,4 +1,5 @@
 var Matrix = require('./matrix');
+var rat = require('./rational');
 
 var a = new Matrix( [ [1, 2], [3, 4] ] );
 console.log('a: ', a.els);
@@ -55,6 +56,34 @@ function identities( n ) {
   return r;
 }
 
-identities(10).map(function(v) {
+identities(5).map(function(v) {
   console.log(v.els);
+});
+
+function gcdTest(a, b) {
+  console.log('gcd( %d, %d ) = %d', a, b, rat.gcd(a,b));
+}
+
+function ratTest(a, b) {
+  console.log('Rational( %d, %d ) = %s', a, b, rat.Rational(a,b));
+}
+
+var pairs = [
+  [ 142, 22 ],
+  [ 40, 35 ],
+  [ 77, 30 ],
+  [ 5325123533, 5325123533 ],
+  [ 5325123530, 123442 ],
+  [ 2*3*5*7, 5*7*11*13 ],
+  [ 1989, 867 ],
+  [ 2*3*5*7*11*13*17, 11*13*17 ]
+];
+
+pairs.forEach( function( p ) {
+  var a = p[0], b = p[1];
+  gcdTest( a, b );
+});
+pairs.forEach( function( p ) {
+  var a = p[0], b = p[1];
+  ratTest( a, b );
 });
