@@ -2,7 +2,7 @@
 function Matrix( els ) {
 
   var defaults = init(els);
-  var a = defaults.a;
+  var a = defaults.a,
       size = defaults.size;
 
   this.els = a;
@@ -27,8 +27,8 @@ function Matrix( els ) {
     };
     if( typeof e === 'object' && e.constructor === Array ) {
       defs.a = e.slice();
-      defs.rows = defs.a.length;
-      defs.cols = defs.a[0].length;
+      defs.size.rows = defs.a.length;
+      defs.size.cols = defs.a[0].length;
     };
     return defs;
   }
