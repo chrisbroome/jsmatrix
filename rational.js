@@ -1,6 +1,8 @@
 function Coprimes( a0, a1 ) {
   function initialize() {
-    return a0 > a1 ? { a: a0, b: a1 } : { a: a1, b: a0 };
+    var a = Math.floor(a0),
+        b = Math.floor(a1);
+    return a > b ? { a: a, b: b } : { a: b, b: a };
   }
   function first( a, b ) {
     return { m: a % b, a: a, b: b,
