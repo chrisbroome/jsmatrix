@@ -49,7 +49,7 @@ console.log('z = a concat g: ', z.els );
 
 function identities( n ) {
   var r = [], i;
-  for( i = 0; i < n; i++ ) {
+  for( i = 0; i <= n; i++ ) {
     r.push(Matrix.identity(i));
   }
   return r;
