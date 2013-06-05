@@ -1,0 +1,10 @@
+{
+  "name": "jsmatrix",
+  "description": "A very crude JavaScript matrix implementation",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": "git://github.com/chrisbroome/jsmatrix.git"
+}
