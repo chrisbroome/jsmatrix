@@ -1,0 +1,6 @@
+# ignore project files
+*.project
+
+# ignore temporary editor files
+*.swp
+*~
