@@ -138,7 +138,19 @@ function iterate( cb ) {
   } ).slice();
 }
 
-function addConstant( n ) {
+function iterateMapRowIteration(x, ci, c) {
+  var o = this;
+  return o.cb( x, ci, o.ri, c );
+}
+
+function iterateMapMatrixIteration(row, ri) {
+  var cb = this;
+  var o = {cb: cb, ri: ri};
+  var f = iterateMapRowIteration.bind(o);
+  return row.map(f).slice();
+}
+
+function addConstant(n) {
   var f = addConstantIteration.bind(n);
   return new Matrix(this.iterate(f));
 }

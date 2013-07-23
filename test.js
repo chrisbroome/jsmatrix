@@ -26,6 +26,13 @@ function matrixTests() {
         [8, 3, 2, 4, 2],
         [2, 6, 2, 3, 7],
         [4, 9, 6, 3, 7]
+      ]),
+      z: new Matrix([
+        [ 1,  2,  3,  4,  5],
+        [ 6,  7,  8,  9, 10],
+        [11, 12, 13, 14, 15],
+        [16, 17, 18, 19, 20],
+        [21, 22, 23, 24, 25],
       ])
     };
     return m;
@@ -62,6 +69,7 @@ function matrixTests() {
     var g = matrices.g;
     var x = matrices.x;
     var y = matrices.y;
+    var z = matrices.z;
 
     output( 'a', a );
     output( 'b', b );
@@ -73,12 +81,19 @@ function matrixTests() {
     output( 'a * g', a.multiply( g ) );
     output( 'x', x );
     output( 'y', y );
+    output( 'z', z );
     output( 'x * y', x.multiply( y ) );
     output( 'a & g', a.concat( g ) );
 
     identities(5).map( function( v, k ) {
       output('I('+k+')', v );
     } );
+
+    var i5 = Matrix.identity(5);
+    output( 'z * I(5)', z.multiply(i5) );
+    output( 'I(5) * z', i5.multiply(z) );
+    output( 'z * z', z.multiply( z ) );
+    output( 'y * z', y.multiply( z ) );
   }
 
   run();
