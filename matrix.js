@@ -15,6 +15,9 @@ Matrix.prototype = addMethods({
   cols: 0,
   name: ''
 });
+Matrix.isMatrix = function(o) {
+  return o instanceof Matrix;
+}
 
 Matrix.zero = new Matrix();
 
@@ -56,10 +59,6 @@ function addMethods( o ) {
   f( 'iterate', iterate, '' );
   f( 'toString', toString, '' );
   return o;
-}
-
-function isMatrix( o ) {
-  return typeof o === 'object';
 }
 
 // @description: gets the rows
@@ -109,7 +108,7 @@ function add( m ) {
   if( typeof m === 'number' ) {
     return this.addConstant( m );
   }
-  else if( isMatrix( m ) ) {
+  else if( Matrix.isMatrix( m ) ) {
     return this.addMatrix( m );
   }
   else {
@@ -122,7 +121,7 @@ function multiply( m ) {
   if( typeof m === 'number' ) {
     return this.multiplyConstant( m );
   }
-  else if( isMatrix( m ) ) {
+  else if( Matrix.isMatrix( m ) ) {
     return this.multiplyMatrix( m );
   }
   else {
