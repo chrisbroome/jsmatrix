@@ -76,8 +76,8 @@ function row( i ) {
 }
 
 // @description: gets a row vector at the specified column
-function col( i ) {
-  return this.a.map( colSelector.bind(i) ).slice();
+function col(i) {
+  return this.a.map( colSelector.bind(i) );
 }
 
 function colSelector(v) {
@@ -96,57 +96,44 @@ function rows() {
 
 // @description: returns an array of column vectors
 function cols() {
-  var c, x = [];
-  for( c = 0; c < this.C; c++ ) {
+  var c = 0, x = [];
+  for(; c < this.C; c++ ) {
     x.push( this.col( c ) );
   }
   return x;
 }
 
 // @descprition: adds another matrix or constant to this matrix and returns the result
-function add( m ) {
-  if( typeof m === 'number' ) {
-    return this.addConstant( m );
-  }
-  else if( Matrix.isMatrix( m ) ) {
-    return this.addMatrix( m );
-  }
-  else {
-    return m;
-  }
+function add(m) {
+  if( typeof m === 'number' ) return this.addConstant(m);
+  if( Matrix.isMatrix(m) ) return this.addMatrix(m);
+  return m;
 }
 
-// @description: multiplies another matrix or constant to this matrix and returns the result
-function multiply( m ) {
-  if( typeof m === 'number' ) {
-    return this.multiplyConstant( m );
-  }
-  else if( Matrix.isMatrix( m ) ) {
-    return this.multiplyMatrix( m );
-  }
-  else {
-    return m;
-  }
+// @description: multiplies this matrix by another matrix or constant and returns the result
+function multiply(m) {
+  if( typeof m === 'number' ) return this.multiplyConstant(m);
+  if( Matrix.isMatrix(m) ) return this.multiplyMatrix(m);
+  return m;
 }
 
-function iterate( cb ) {
-  return this.a.map( function( row, r_index ) {
-    return row.map( function( value, c_index ) {
-        return cb( value, c_index, r_index, row );
-      } ).slice();
-  } ).slice();
-}
-
-function iterateMapRowIteration(x, ci, c) {
-  var o = this;
-  return o.cb( x, ci, o.ri, c );
+// callback takes the following arguments:
+//   (value, columnIndex, rowIndex, collection)
+function iterate(callback) {
+  var f = iterateMapMatrixIteration.bind(callback);
+  return this.a.map(f);
 }
 
 function iterateMapMatrixIteration(row, ri) {
   var cb = this;
   var o = {cb: cb, ri: ri};
   var f = iterateMapRowIteration.bind(o);
-  return row.map(f).slice();
+  return row.map(f);
+}
+
+function iterateMapRowIteration(x, ci, c) {
+  var o = this;
+  return o.cb( x, ci, o.ri, c );
 }
 
 function addConstant(n) {
