@@ -4,3 +4,4 @@
 # ignore temporary editor files
 *.swp
 *~
+.idea/
